@@ -6,8 +6,10 @@ const BaseLayout = ({ children }: { children: ReactNode }) => {
   return (
     <>
       <BaseLayoutHeader />
-      <div className="min-h-[calc(100vh-100px)] mt-[100px]">
-        <div className="md:w-[680px]  xl:w-[1280px] mt-16">{children}</div>
+      <div className="min-h-[calc(100vh-100px)] mt-[100px] flex justify-center">
+        <div className="w-full md:w-[680px] xl:w-[1280px] py-16">
+          {children}
+        </div>
       </div>
     </>
   );
