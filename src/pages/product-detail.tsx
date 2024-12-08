@@ -1,17 +1,20 @@
 import { Loading } from "@/components";
 import { Button } from "@/components/ui/button";
-import { Endpoints } from "@/constants";
+import { Endpoints, Pages } from "@/constants";
 import { BaseLayout } from "@/layouts";
 import { toUrl } from "@/lib/utils";
+import { CartContext } from "@/provider/cart-context";
 import { axiosInstance } from "@/service/axios-instance";
 import { ProductType } from "@/types";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState<ProductType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams<{ id: string }>();
+  const { isInCart, addToCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
@@ -40,11 +43,27 @@ const ProductDetail = () => {
             <div className="text-5xl">{product.title}</div>
             <p className="text-5xl font-bold py-8">$ {product.price}</p>
             <p className="text-lg text-gray-400">{product.description}</p>
-            <div className="w-full flex gap-8 py-8">
-              <Button variant={"outline"} className="rounded-none px-16 py-8">
-                장바구니에 담기
-              </Button>
-              <Button className="bg-gray-500 border border-input dark:bg-background dark:text-white dark:hover:bg-gray-800 rounded-none px-16 py-8">
+            <div className="w-full flex gap-2 md:gap-8 py-8">
+              {isInCart(product.id) ? (
+                <Button
+                  disabled
+                  className="bg-gray-500 border border-input dark:bg-background dark:text-white dark:hover:bg-gray-800 rounded-none px-2 py-1 md:px-16 md:py-8"
+                >
+                  장바구니에 담긴 제품
+                </Button>
+              ) : (
+                <Button
+                  variant={"outline"}
+                  className="rounded-none px-16 py-8"
+                  onClick={() => addToCart(product)}
+                >
+                  장바구니에 담기
+                </Button>
+              )}
+              <Button
+                className="bg-gray-500 border border-input dark:bg-background dark:text-white dark:hover:bg-gray-800 rounded-none px-2 py-1 md:px-16 md:py-8"
+                onClick={() => navigate(Pages.Cart)}
+              >
                 장바구니로 이동
               </Button>
             </div>

@@ -4,6 +4,7 @@ export enum Pages {
   SignUp = "/sign-up",
   Product = "/product",
   ProductDetail = "/product/:id",
+  Cart = "/cart",
 }
 
 export enum Endpoints {
