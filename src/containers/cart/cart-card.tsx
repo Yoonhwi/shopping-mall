@@ -43,7 +43,11 @@ const CartCart = ({ data }: CartCardProps) => {
           >
             -
           </Button>
-          <Button disabled variant={"outline"}>
+          <Button
+            disabled
+            variant={"outline"}
+            className="dark:text-white dark:opacity-100"
+          >
             {data.quantity}
           </Button>
           <Button

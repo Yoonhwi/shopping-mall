@@ -14,7 +14,7 @@ const Cart = () => {
   return (
     <BaseLayout>
       {cart.length ? (
-        <div className="w-full h-full flex flex-col gap-2 px-8 md:0">
+        <div className="w-full h-full flex flex-col gap-2 px-8">
           {cart.map((item) => {
             return <CartCard key={item.product.id} data={item} />;
           })}

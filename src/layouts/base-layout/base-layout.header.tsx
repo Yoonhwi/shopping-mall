@@ -1,26 +1,24 @@
 import { Button } from "@/components/ui/button";
-import { useDarkMode } from "@/hooks";
-import { MdOutlineWbSunny } from "react-icons/md";
-import { LuMoonStar } from "react-icons/lu";
-import { LuShoppingCart } from "react-icons/lu";
-import { FiUser } from "react-icons/fi";
-import { ImExit } from "react-icons/im";
-import { useContext, useMemo } from "react";
-import { AuthContext } from "@/provider/auth-context";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useNavigate } from "react-router";
 import { Pages } from "@/constants";
-import { CartContext } from "@/provider/cart-context";
+import { useDarkMode } from "@/hooks";
+import { AuthContext } from "@/provider/auth-context";
+import { useContext, useMemo } from "react";
+import { FiUser } from "react-icons/fi";
+import { ImExit } from "react-icons/im";
+import { LuMoonStar } from "react-icons/lu";
+import { MdOutlineWbSunny } from "react-icons/md";
+import { useNavigate } from "react-router";
+import HeaderCartIcon from "./header.cart-icon";
 
 const BaseLayoutHeader = () => {
   const { isDark, toggleDarkMode } = useDarkMode();
   const { currentUser, signOut } = useContext(AuthContext);
-  const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const loginStatusBtn = useMemo(() => {
@@ -64,25 +62,7 @@ const BaseLayoutHeader = () => {
           Shop
         </h1>
         <div className="flex gap-3">
-          <TooltipProvider delayDuration={0}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  onClick={() => navigate(Pages.Cart)}
-                  variant={"ghost"}
-                  className="[&_svg]:size-6"
-                >
-                  <div className="relative">
-                    <LuShoppingCart />
-                    <div className="absolute top-[-10px] right-[-10px] min-w-5 min-h-5 bg-red-500 text-white text-xs flex justify-center items-center rounded-full">
-                      {cart.length}
-                    </div>
-                  </div>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent side="bottom">장바구니</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <HeaderCartIcon />
 
           {(currentUser ? loginStatusBtn : logoutStatusBtn).map(
             (btn, index) => (
