@@ -1,34 +1,11 @@
 import { Loading } from "@/components";
 import { Button } from "@/components/ui/button";
+import { categories, Endpoints } from "@/constants";
 import { ProductCard } from "@/containers";
-import { Endpoints } from "@/constants";
 import { BaseLayout } from "@/layouts";
 import { ProductCategoryType, ProductType } from "@/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-const categories: ProductCategoryType[] = [
-  {
-    value: "all",
-    label: "모두",
-  },
-  {
-    value: "electronics",
-    label: "전자제품",
-  },
-  {
-    value: "jewelery",
-    label: "보석",
-  },
-  {
-    value: "men's clothing",
-    label: "남성의류",
-  },
-  {
-    value: "women's clothing",
-    label: "여성의류",
-  },
-];
 
 const defaultCategory: ProductCategoryType = {
   value: "all",
@@ -38,7 +15,6 @@ const defaultCategory: ProductCategoryType = {
 const Home = () => {
   const [selectedCategory, setSelectedCategory] =
     useState<ProductCategoryType>(defaultCategory);
-
   const [data, setData] = useState<ProductType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -58,10 +34,6 @@ const Home = () => {
         });
     }
   }, [selectedCategory]);
-
-  console.log(data);
-
-  console.log("rerender");
 
   return (
     <BaseLayout>

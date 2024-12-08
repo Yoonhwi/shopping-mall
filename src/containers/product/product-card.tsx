@@ -25,7 +25,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <h2 className="max-w-[160px] text-ellipsis overflow-hidden whitespace-nowrap">
           {product.title}
         </h2>
-        <div className="flex justify-between w-full px-8 items-center">
+        <div className="flex justify-between w-full max-w-[300px] px-8 items-center ">
           <Button
             variant={"outline"}
             onClick={(e: MouseEvent) => {
