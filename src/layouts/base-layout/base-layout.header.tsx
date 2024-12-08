@@ -62,7 +62,7 @@ const BaseLayoutHeader = () => {
 
   return (
     <div className="fixed top-0 left-0 right-0 h-[100px] flex justify-center items-center shadow-md dark:shadow-[0px_4px_6px_rgba(255,255,255,0.2)] z-10">
-      <div className="w-full md:w-[680px] xl:w-[1280px] flex justify-between items-center px-8">
+      <div className="w-full md:w-[680px] xl:w-[1280px] flex justify-between items-center px-8 md:px-0">
         <h1
           className="text-2xl font-[700] cursor-pointer"
           onClick={() => navigate(Pages.Home)}

@@ -6,8 +6,8 @@ export enum Pages {
   ProductDetail = "/product/:id",
 }
 
-const baseUrl = "https://fakestoreapi.com";
 export enum Endpoints {
-  AllProducts = `${baseUrl}/products`,
-  SpecificProduct = `${baseUrl}/products/category`,
+  AllProducts = "products",
+  DetailProduct = "products{/:id}",
+  SpecificProduct = "products/category",
 }

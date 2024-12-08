@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { categories, Endpoints } from "@/constants";
 import { ProductCard } from "@/containers";
 import { BaseLayout } from "@/layouts";
+import { axiosInstance } from "@/service/axios-instance";
 import { ProductCategoryType, ProductType } from "@/types";
-import axios from "axios";
 import { useEffect, useState } from "react";
 
 const defaultCategory: ProductCategoryType = {
@@ -21,12 +21,12 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     if (selectedCategory.value === "all") {
-      axios.get(Endpoints.AllProducts).then((res) => {
+      axiosInstance.get(Endpoints.AllProducts).then((res) => {
         setData(res.data);
         setLoading(false);
       });
     } else {
-      axios
+      axiosInstance
         .get(`${Endpoints.SpecificProduct}/${selectedCategory.value}`)
         .then((res) => {
           setData(res.data);
@@ -62,7 +62,7 @@ const Home = () => {
         {loading ? (
           <Loading />
         ) : (
-          <div className="px-8 w-full flex flex-col gap-2">
+          <div className="w-full flex flex-col gap-2 px-8 md:px-0">
             <div>Showing: {data.length} items</div>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
               {data.map((product) => {
