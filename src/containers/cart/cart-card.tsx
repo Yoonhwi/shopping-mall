@@ -3,7 +3,7 @@ import { Pages } from "@/constants";
 import { toUrl } from "@/lib/utils";
 import { CartContext } from "@/provider/cart-context";
 import { CartItemType } from "@/types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { useNavigate } from "react-router";
 
@@ -14,17 +14,23 @@ interface CartCardProps {
 const CartCart = ({ data }: CartCardProps) => {
   const { decreaseQuantity, increaseQuantity, removeFromCart } =
     useContext(CartContext);
+  const [isImgLoading, setIsImgLoading] = useState(true);
+
   const sum = (data.product.price * data.quantity).toFixed(2);
   const navigate = useNavigate();
 
   return (
     <div className="flex gap-8 items-center w-full border-b-2 py-12 relative min-h-[220px]">
+      {isImgLoading && (
+        <div className="w-[150px] h-[150px] bg-slate-200 absolute" />
+      )}
       <img
         src={data.product.image}
         className="w-[150px] h-[150px] object-contain cursor-pointer"
         onClick={() =>
           navigate(toUrl(Pages.ProductDetail, { id: String(data.product.id) }))
         }
+        onLoad={() => setIsImgLoading(false)}
       />
 
       <div className="flex flex-col md:flex-row gap-2 flex-1">
