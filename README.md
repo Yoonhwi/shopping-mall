@@ -1,6 +1,7 @@
 ## 🛒 Simple Shopping Mall Project
 
 React, TypeScript, TailwindCSS, and ShadCN UI를 활용하여 제작한 쇼핑몰 프로젝트입니다.
+[Vercel 배포 페이지](https://shopping-mall-os5u.vercel.app)
 
 ### Features
 
