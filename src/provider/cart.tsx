@@ -1,5 +1,5 @@
 import { CartItemType, ProductType } from "@/types";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CartContext } from "./cart-context";
 
 interface AuthProviderProps {
@@ -27,10 +27,6 @@ export const CartProvider = ({ children }: AuthProviderProps) => {
       if (isItemInCart) return;
 
       setCart([...cart, { product: item, quantity: 1 }]);
-      localStorage.setItem(
-        "cart",
-        JSON.stringify([...cart, { product: item, quantity: 1 }])
-      );
     },
     [cart]
   );
@@ -41,7 +37,6 @@ export const CartProvider = ({ children }: AuthProviderProps) => {
         (cartItem) => cartItem.product.id !== productId
       );
       setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
     },
     [cart]
   );
@@ -58,7 +53,6 @@ export const CartProvider = ({ children }: AuthProviderProps) => {
         return cartItem;
       });
       setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
     },
     [cart]
   );
@@ -78,14 +72,12 @@ export const CartProvider = ({ children }: AuthProviderProps) => {
       });
 
       setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
     },
     [cart]
   );
 
   const removeAllFromCart = useCallback(() => {
     setCart([]);
-    localStorage.removeItem("cart");
   }, []);
 
   const sumPrice = useMemo(() => {
@@ -94,6 +86,10 @@ export const CartProvider = ({ children }: AuthProviderProps) => {
         return acc + item.product.price * item.quantity;
       }, 0)
       .toFixed(2);
+  }, [cart]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
   return (

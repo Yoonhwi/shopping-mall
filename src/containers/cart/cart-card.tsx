@@ -18,10 +18,10 @@ const CartCart = ({ data }: CartCardProps) => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex gap-4 items-center w-full border-b-2 py-4 relative">
+    <div className="flex gap-8 items-center w-full border-b-2 py-12 relative min-h-[220px]">
       <img
         src={data.product.image}
-        className="w-[150px] max-h-[200px] object-contain cursor-pointer"
+        className="w-[150px] h-[150px] object-contain cursor-pointer"
         onClick={() =>
           navigate(toUrl(Pages.ProductDetail, { id: String(data.product.id) }))
         }

@@ -54,7 +54,7 @@ const ProductDetail = () => {
               ) : (
                 <Button
                   variant={"outline"}
-                  className="rounded-none px-16 py-8"
+                  className="rounded-none px-2 py-1 md:px-16 md:py-8"
                   onClick={() => addToCart(product)}
                 >
                   장바구니에 담기

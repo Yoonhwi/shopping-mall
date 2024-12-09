@@ -15,7 +15,10 @@ const CartIconPopoverContent = () => {
         {cart.map((item) => {
           const product = item.product;
           return (
-            <div className="flex gap-6 items-center px-4 py-6 border-b-1 relative">
+            <div
+              className="flex gap-6 items-center px-4 py-6 border-b-1 relative"
+              key={product.id}
+            >
               <img
                 src={product.image}
                 alt="product_img"
