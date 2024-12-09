@@ -18,8 +18,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
       className="w-full h-[400px] border-solid border-2 border-gray-200 rounded-lg flex flex-col gap-4 overflow-hidden cursor-pointer transform transition-transform duration-300 hover:-translate-y-2"
       onClick={() => navigate(`${Pages.Product}/${product.id}`)}
     >
-      <div className="w-full h-[260px] bg-white">
-        {isImgLoading && <div className="w-full h-[260px] bg-slate-200" />}
+      <div className="w-full h-[260px] bg-white relative">
+        {isImgLoading && (
+          <div className="w-full h-[260px] bg-slate-200 absolute" />
+        )}
         <img
           src={product.image}
           alt={product.title}
